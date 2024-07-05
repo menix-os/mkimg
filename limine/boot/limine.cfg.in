@@ -1,0 +1,6 @@
+TIMEOUT=5
+
+:menix $MENIX_VERSION
+    PROTOCOL=limine
+    KASLR=no
+    KERNEL_PATH=boot:///boot/menix
