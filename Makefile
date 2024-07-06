@@ -2,14 +2,14 @@
 .PHONY: limine efi clean qemu
 
 BUILD_DIR=build
-KERNEL_SRC=../kernel
+KERNEL_SRC=../kernel/build/bin
 SRC=$(shell find src/ -name '*')
 QEMU=qemu-system-x86_64
 QEMU_OVMF=/usr/share/qemu/ovmf-x86_64.bin
 ifeq ($(DEBUG),1)
 QEMU_DEBUG=-d cpu_reset
 endif
-QEMU_FLAGS=-s $(QEMU_DEBUG) -no-reboot -monitor stdio -bios $(QEMU_OVMF) -drive file=fat:rw:$(BUILD_DIR)
+QEMU_FLAGS=-s $(QEMU_DEBUG) -no-reboot -serial stdio -bios $(QEMU_OVMF) -drive file=fat:rw:$(BUILD_DIR)
 ###################################
 
 # Progress indication
@@ -28,7 +28,7 @@ C = $(words $N)$(eval N := x $N)
 ECHO = echo "`expr " [\`expr $C '*' 100 / $T\`" : '.*\(....\)$$'`%]"
 endif
 
-export MENIX_VERSION=$(shell cat $(KERNEL_SRC)/build/version)
+export MENIX_VERSION=$(shell cat $(KERNEL_SRC)/version)
 
 limine: $(BUILD_DIR)/boot/menix
 	@$(ECHO) "Copying limine/"
@@ -40,9 +40,9 @@ limine: $(BUILD_DIR)/boot/menix
 
 	@$(ECHO) "Built limine image to $(BUILD_DIR)"
 
-$(BUILD_DIR)/boot/menix: $(KERNEL_SRC)/build/menix $(BUILD_DIR)
+$(BUILD_DIR)/boot/menix: $(KERNEL_SRC)/menix $(BUILD_DIR)
 	@$(ECHO) "Copying kernel"
-	@cp $(KERNEL_SRC)/build/menix $(BUILD_DIR)/boot/
+	@cp $(KERNEL_SRC)/menix $(BUILD_DIR)/boot/
 
 $(BUILD_DIR): $(SRC)
 	@$(ECHO) "Creating output directory"
