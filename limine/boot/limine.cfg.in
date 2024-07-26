@@ -1,6 +1,8 @@
 TIMEOUT=5
 
-:menix $MENIX_VERSION
+:menix
     PROTOCOL=limine
     KASLR=no
     KERNEL_PATH=boot:///boot/menix
+	MODULE_PATH=boot:///boot/menix_icon
+	CMDLINE=terminal=serial;icon_path=/boot/menix_icon;root=ram

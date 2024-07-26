@@ -7,7 +7,7 @@ SRC=$(shell find src/ -name '*')
 QEMU=qemu-system-x86_64
 QEMU_OVMF=/usr/share/qemu/ovmf-x86_64.bin
 ifeq ($(DEBUG),1)
-QEMU_DEBUG=-d cpu_reset
+QEMU_DEBUG=-d cpu_reset,int
 endif
 QEMU_FLAGS=-s $(QEMU_DEBUG) -no-reboot -serial stdio -bios $(QEMU_OVMF) -drive file=fat:rw:$(BUILD_DIR)
 ###################################
