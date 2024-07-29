@@ -28,8 +28,6 @@ C = $(words $N)$(eval N := x $N)
 ECHO = echo "`expr " [\`expr $C '*' 100 / $T\`" : '.*\(....\)$$'`%]"
 endif
 
-export MENIX_VERSION=$(shell cat $(KERNEL_SRC)/version)
-
 limine: $(BUILD_DIR)/boot/menix
 	@$(ECHO) "Copying limine/"
 	@cp -r limine/. $(BUILD_DIR)
