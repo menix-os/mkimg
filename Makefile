@@ -29,12 +29,8 @@ ECHO = echo "`expr " [\`expr $C '*' 100 / $T\`" : '.*\(....\)$$'`%]"
 endif
 
 limine: $(BUILD_DIR)/boot/menix
-	@$(ECHO) "Copying limine/"
+	@$(ECHO) "Copying limine"
 	@cp -r limine/. $(BUILD_DIR)
-
-	@$(ECHO) "Filling limine config"
-	@envsubst < $(BUILD_DIR)/boot/limine.cfg.in > $(BUILD_DIR)/boot/limine.cfg
-	@rm $(BUILD_DIR)/boot/limine.cfg.in
 
 	@$(ECHO) "Built limine image to $(BUILD_DIR)"
 
