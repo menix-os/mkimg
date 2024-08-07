@@ -9,7 +9,7 @@ QEMU_OVMF=/usr/share/qemu/ovmf-x86_64.bin
 ifeq ($(DEBUG),1)
 QEMU_DEBUG=-d cpu_reset -s -S
 endif
-QEMU_FLAGS=$(QEMU_DEBUG) -no-reboot -no-shutdown -serial stdio -bios $(QEMU_OVMF) -drive file=fat:rw:$(BUILD_DIR)
+QEMU_FLAGS=$(QEMU_DEBUG) -m 4G -no-reboot -no-shutdown -serial stdio -bios $(QEMU_OVMF) -drive file=fat:rw:$(BUILD_DIR)
 ###################################
 
 # Progress indication
